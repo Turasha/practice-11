@@ -63,8 +63,8 @@ function createDots() {
 
     dotChild.addEventListener("click", function () {
       let idDot = this.getAttribute("data-id");
-      sliderIndex =idDot
-      setSlide()
+      sliderIndex = idDot;
+      setSlide();
     });
   });
 
@@ -115,3 +115,106 @@ arrowLeft.addEventListener("click", arrowClickLeft);
 // setInterval( ()=>{
 //     arrowClickRight()
 // }, 3000 )
+
+//form practice
+
+let formEl = document.getElementById("login");
+
+formEl.addEventListener("submit", function (e) {
+  e.preventDefault();
+  let errors = {};
+
+  //
+
+  let userNamevalue = document.getElementById("usernamefield").value;
+
+  if (userNamevalue == "") {
+    errors.username = "username value can not be empty";
+  }
+
+  // passwords
+  let passw1 = document.getElementById("passwordfield").value;
+  let passw2 = document.getElementById("passwordfield2").value;
+  if (passw1 == "") {
+    errors.passw = "password value cannot be empty";
+  }
+
+  if (passw1 != passw2) {
+    errors.passw2 = "passwords do not metch";
+  }
+
+  //radio
+
+  let gender = false;
+
+  this.querySelectorAll(".genderinput").forEach((item) => {
+    if (item.checked) {
+      gender = true;
+    }
+  });
+
+  if (!gender) {
+    errors.gender = "select your gender";
+  }
+  //
+  let agree = document.getElementById("check").checked;
+  if (!agree) {
+    errors.agree = " you must agree terms and conditions";
+  }
+
+  console.log(errors);
+
+  this.querySelectorAll(".error-text").forEach((el) => {
+    el.innerText = " ";
+  });
+
+  for (let item in errors) {
+    console.log(item); //key
+
+    let errorElement = document.getElementById("error-" + item);
+
+    console.log(errorElement);
+    if (errorElement) {
+      errorElement.innerText = errors[item];
+    }
+  }
+
+  if (Object.keys(errors).length === 0) {
+    this.submit();
+  }
+});
+
+//show hide
+
+let passw = document.getElementById("passwordfield");
+let iconPassw = document.getElementById("icon");
+
+iconPassw.addEventListener("click", function () {
+  if (passw.type === "password") {
+    passw.setAttribute("type", "text");
+    iconPassw.classList.remove("fa-eye");
+    iconPassw.classList.add("fa-eye-slash");
+  } else {
+    passw.setAttribute("type", "password");
+    iconPassw.classList.remove("fa-eye-slash");
+    iconPassw.classList.add("fa-eye");
+  }
+});
+
+//email validation
+let emailfield = document.getElementById("emailField");
+
+function validationEmail() {
+  let emailFieldvalue = document.getElementById("emailField").value;
+  let emailError = document.getElementById("error-email");
+  let emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if (emailFieldvalue.match(emailPattern)) {
+    emailError.innerText = "ypur email is valid";
+    emailError.style.color = "green";
+  } else {
+    emailError.innerText = "your email is invalid";
+    emailError.style.color = "red";
+  }
+}
+
+emailfield.addEventListener("keyup", validationEmail);

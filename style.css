@@ -44,3 +44,26 @@ img {
     background-color: white;
     cursor: pointer;
 }
+
+
+
+/* form practice */
+.form-div{
+    display: flex;
+    flex-direction: column;
+}
+.form-el{
+    max-width: 700px;
+    width: 100%;
+}
+.error-text{
+    color: red;
+}
+.form-div{
+    position: relative;
+}
+.show{
+    position: absolute;
+    top: 18px;
+    right: 5px;
+}
